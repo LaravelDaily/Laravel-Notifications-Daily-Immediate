@@ -57,6 +57,24 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.skills') }}
+                        </th>
+                        <td>
+                            @foreach($user->skills as $key => $skills)
+                                <span class="label label-info">{{ $skills->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.notifications_frequency') }}
+                        </th>
+                        <td>
+                            {{ App\User::NOTIFICATIONS_FREQUENCY_RADIO[$user->notifications_frequency] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

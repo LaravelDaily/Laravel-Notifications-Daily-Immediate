@@ -9,4 +9,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Users
     Route::apiResource('users', 'UsersApiController');
+
+    // Skills
+    Route::apiResource('skills', 'SkillsApiController');
+
+    // Jobs
+    Route::apiResource('jobs', 'JobsApiController');
 });

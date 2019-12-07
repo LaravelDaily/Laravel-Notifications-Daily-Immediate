@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
+use App\Skill;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -29,13 +30,16 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles'));
+        $skills = Skill::all()->pluck('name', 'id');
+
+        return view('admin.users.create', compact('roles', 'skills'));
     }
 
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->skills()->sync($request->input('skills', []));
 
         return redirect()->route('admin.users.index');
     }
@@ -46,15 +50,18 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $user->load('roles');
+        $skills = Skill::all()->pluck('name', 'id');
 
-        return view('admin.users.edit', compact('roles', 'user'));
+        $user->load('roles', 'skills');
+
+        return view('admin.users.edit', compact('roles', 'skills', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->skills()->sync($request->input('skills', []));
 
         return redirect()->route('admin.users.index');
     }
@@ -63,7 +70,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles');
+        $user->load('roles', 'skills');
 
         return view('admin.users.show', compact('user'));
     }

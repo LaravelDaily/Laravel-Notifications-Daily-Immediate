@@ -19,19 +19,28 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'    => [
+            'name'                    => [
                 'required',
             ],
-            'email'   => [
+            'email'                   => [
                 'required',
                 'unique:users,email,' . request()->route('user')->id,
             ],
-            'roles.*' => [
+            'roles.*'                 => [
                 'integer',
             ],
-            'roles'   => [
+            'roles'                   => [
                 'required',
                 'array',
+            ],
+            'skills.*'                => [
+                'integer',
+            ],
+            'skills'                  => [
+                'array',
+            ],
+            'notifications_frequency' => [
+                'required',
             ],
         ];
     }

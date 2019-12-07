@@ -72,6 +72,46 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '16',
                 'title' => 'user_access',
             ],
+            [
+                'id'    => '17',
+                'title' => 'skill_create',
+            ],
+            [
+                'id'    => '18',
+                'title' => 'skill_edit',
+            ],
+            [
+                'id'    => '19',
+                'title' => 'skill_show',
+            ],
+            [
+                'id'    => '20',
+                'title' => 'skill_delete',
+            ],
+            [
+                'id'    => '21',
+                'title' => 'skill_access',
+            ],
+            [
+                'id'    => '22',
+                'title' => 'job_create',
+            ],
+            [
+                'id'    => '23',
+                'title' => 'job_edit',
+            ],
+            [
+                'id'    => '24',
+                'title' => 'job_show',
+            ],
+            [
+                'id'    => '25',
+                'title' => 'job_delete',
+            ],
+            [
+                'id'    => '26',
+                'title' => 'job_access',
+            ],
         ];
 
         Permission::insert($permissions);

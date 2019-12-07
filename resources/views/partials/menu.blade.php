@@ -52,6 +52,26 @@
                     </ul>
                 </li>
             @endcan
+            @can('skill_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.skills.index") }}" class="nav-link {{ request()->is('admin/skills') || request()->is('admin/skills/*') ? 'active' : '' }}">
+                        <i class="fa-fw far fa-chart-bar nav-icon">
+
+                        </i>
+                        {{ trans('cruds.skill.title') }}
+                    </a>
+                </li>
+            @endcan
+            @can('job_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.jobs.index") }}" class="nav-link {{ request()->is('admin/jobs') || request()->is('admin/jobs/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-briefcase nav-icon">
+
+                        </i>
+                        {{ trans('cruds.job.title') }}
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
