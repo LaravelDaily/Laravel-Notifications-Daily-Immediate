@@ -63,6 +63,36 @@
                         <input type="password" name="password_confirmation" class="form-control" required placeholder="{{ trans('global.login_password_confirmation') }}">
                     </div>
 
+                    <div class="form-group">
+                        <select class="form-control select2 {{ $errors->has('skills') ? 'is-invalid' : '' }}" name="skills[]" id="skills" multiple>
+                            @foreach($skills as $id => $skills)
+                                <option value="{{ $id }}" {{ in_array($id, old('skills', [])) ? 'selected' : '' }}>{{ $skills }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('skills'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('skills') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.user.fields.skills_helper') }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">{{ trans('cruds.user.fields.notifications_frequency') }}</label>
+                        @foreach(App\User::NOTIFICATIONS_FREQUENCY_RADIO as $key => $label)
+                            <div class="form-check {{ $errors->has('notifications_frequency') ? 'is-invalid' : '' }}">
+                                <input class="form-check-input" type="radio" id="notifications_frequency_{{ $key }}" name="notifications_frequency" value="{{ $key }}" {{ old('notifications_frequency', 'once') === (string) $key ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="notifications_frequency_{{ $key }}">{{ $label }}</label>
+                            </div>
+                        @endforeach
+                        @if($errors->has('notifications_frequency'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('notifications_frequency') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.user.fields.notifications_frequency_helper') }}</span>
+                    </div>
+
                     <button class="btn btn-block btn-primary">
                         {{ trans('global.register') }}
                     </button>
@@ -74,4 +104,16 @@
     </div>
 </div>
 
+@endsection
+
+@section('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+<script>
+$('.select2').select2({'placeholder': ' Skills'})
+</script>
 @endsection
