@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Observers\JobObserver;
 
 class Job extends Model
 {
@@ -25,6 +26,13 @@ class Job extends Model
         'description',
         'contact_email',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::observe(new JobObserver);
+    }
 
     public function skills()
     {

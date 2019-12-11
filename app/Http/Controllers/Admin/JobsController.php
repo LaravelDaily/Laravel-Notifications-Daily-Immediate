@@ -35,7 +35,6 @@ class JobsController extends Controller
     public function store(StoreJobRequest $request)
     {
         $job = Job::create($request->all());
-        $job->skills()->sync($request->input('skills', []));
 
         return redirect()->route('admin.jobs.index');
     }
