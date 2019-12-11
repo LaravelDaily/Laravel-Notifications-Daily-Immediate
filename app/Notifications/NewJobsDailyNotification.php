@@ -3,10 +3,11 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewJobImmediateNotification extends Notification
+class NewJobsDailyNotification extends Notification
 {
     use Queueable;
 
@@ -15,9 +16,9 @@ class NewJobImmediateNotification extends Notification
      *
      * @return void
      */
-    public function __construct($job)
+    public function __construct($jobs)
     {
-        $this->job = $job;
+        $this->jobs = $jobs;
     }
 
     /**
@@ -39,13 +40,6 @@ class NewJobImmediateNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->subject('New job has been posted')
-                    ->line('A new job listing has been posted: '.$this->job->title)
-                    ->line('Skills: '.$this->job->skills->implode('name', ', '))
-                    ->line('Description: '.$this->job->description)
-                    ->line('Contact email: '.$this->job->contact_email)
-                    ->action('View job', route('admin.jobs.show', $this->job->id))
-                    ->line('Thank you for using our application!');
+        return (new MailMessage)->markdown('mail.jobs', ['jobs' => $this->jobs]);
     }
 }
