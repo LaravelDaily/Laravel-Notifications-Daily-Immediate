@@ -1,6 +1,6 @@
 # Laravel 6 Demo with Email Notifications Daily or Immediately
 
-Repository that used in [this article](https://quickadminpanel.com/blog/laravel-user-notifications-send-immediately-or-daily-digest/)
+Repository that is used in [this article](https://quickadminpanel.com/blog/laravel-user-notifications-send-immediately-or-daily-digest/)
 
 - - - - -
 
