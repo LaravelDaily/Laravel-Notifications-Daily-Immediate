@@ -53,7 +53,7 @@ class SendDailyJobsEmails extends Command
         {
             $userSkills = $user->skills;
             $userJobs = $jobs->filter(function ($job) use ($userSkills) {
-                return $job->skills->contains(function($key, $value) use($userSkills) {
+                return $job->skills->contains(function($value) use($userSkills) {
                     return $userSkills->contains($value);
                 });
             });
